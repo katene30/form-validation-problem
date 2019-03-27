@@ -1,6 +1,28 @@
 import React, { Component, Fragment } from "react";
 
 export default class AwesomeForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: ""
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange() {
+    if (event.target.name == "email") {
+      var isValid = this.emailValidation(event.target.value);
+      isValid
+        ? this.setState({ email: event.target.value })
+        : console.log("email is invalid");
+    }
+  }
+
+  emailValidation(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  }
+
   render() {
     return (
       <Fragment>
@@ -12,7 +34,12 @@ export default class AwesomeForm extends Component {
               <label class="label" for="email">
                 Email
               </label>
-              <input type="text" id="email" name="email" />
+              <input
+                type="text"
+                id="email"
+                name="email"
+                onChange={this.handleChange}
+              />
             </p>
             <p>
               <label class="label" for="password">
