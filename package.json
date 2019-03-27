@@ -5,10 +5,16 @@
   "repository": "https://github.com/katene30/form-validation-problem.git",
   "author": "Katene Jack Cotton <katenejack@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "nodemon server --watch",
+    "start": "webpack && node server & webpack --watch"
+  },
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "webpack": "^4.29.6"
   },
   "devDependencies": {
-    "nodemon": "^1.18.10"
+    "nodemon": "^1.18.10",
+    "webpack-cli": "^3.3.0"
   }
 }

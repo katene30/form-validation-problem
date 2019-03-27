@@ -1,7 +1,8 @@
-const server = require("./server");
+const path = require("path");
+const express = require("express");
+const server = express();
 
-const PORT = process.env.PORT || 3000;
+server.use(express.static(path.join(__dirname, "../public")));
+server.use(express.json());
 
-server.listen(PORT, () => {
-  console.log("server is listening on port", PORT);
-});
+module.exports = server;
