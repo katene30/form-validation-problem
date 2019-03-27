@@ -5,17 +5,26 @@ export default class AwesomeForm extends Component {
     super(props);
     this.state = {
       email: "",
-      emailIsValid: false
+      emailError: false
     };
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange() {
-    if (event.target.name == "email") {
-      var isValid = this.emailValidation(event.target.value);
-      isValid
-        ? this.setState({ email: event.target.value, emailIsValid: false })
-        : this.setState({ emailIsValid: true });
+    switch (event.target.name) {
+      case "email":
+        var isValid = this.emailValidation(event.target.value);
+        isValid
+          ? this.setState({ email: event.target.value, emailError: false })
+          : this.setState({ emailError: true });
+        break;
+      case "password":
+        var password = event.target.value;
+        var isValid = password.length > 8;
+
+        isValid
+          ? this.setState({ password, passwordError: false })
+          : this.setState({ passwordError: true });
     }
   }
 
@@ -31,7 +40,7 @@ export default class AwesomeForm extends Component {
           <h1>Fill out this awesome form</h1>
           <fieldset>
             <h3>Your details</h3>
-            <p className={!this.state.emailIsValid ? "" : "error"}>
+            <p className={!this.state.emailError ? "" : "error"}>
               <label class="label" for="email">
                 Email
               </label>
@@ -42,22 +51,28 @@ export default class AwesomeForm extends Component {
                 onChange={this.handleChange}
               />
             </p>
-            {this.state.emailIsValid ? (
+            {this.state.emailError ? (
               <p className="error">Email is invalid</p>
             ) : (
               ""
             )}
-            <p>
+
+            <p className={!this.state.passwordError ? "" : "error"}>
               <label class="label" for="password">
                 Password
               </label>
               <input
-                class="error"
                 type="password"
                 id="password"
-                name="username"
+                name="password"
+                onChange={this.handleChange}
               />
             </p>
+            {this.state.passwordError ? (
+              <p className="error">Password must be longer than 8 characters</p>
+            ) : (
+              ""
+            )}
           </fieldset>
 
           <fieldset>

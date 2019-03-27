@@ -133,3 +133,7 @@ fieldset + fieldset {
 .error > input {
   border-color: red;
 }
+
+.error {
+  color: red;
+}
