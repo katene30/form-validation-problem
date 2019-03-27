@@ -5,10 +5,21 @@ export default class AwesomeForm extends Component {
     super(props);
     this.state = {
       email: "",
-      emailError: false
+      emailError: false,
+      password: "",
+      passwordError: false,
+      colour: "",
+      animals: [],
+      animalError: false,
+      tiger: false,
+      submit: false,
+      newAcc: {}
     };
     this.handleChange = this.handleChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
+
+  //onsubmit checkboxes
 
   handleChange() {
     switch (event.target.name) {
@@ -25,7 +36,40 @@ export default class AwesomeForm extends Component {
         isValid
           ? this.setState({ password, passwordError: false })
           : this.setState({ passwordError: true });
+        break;
+      case "colour":
+        this.setState({ colour: event.target.value });
+      case "animal":
+        this.animalsValidation();
+        if (event.target.checked) {
+          this.setState(
+            state => {
+              var animals = [...state.animals, event.target.value];
+              return { animals };
+            },
+            () => this.animalsValidation()
+          );
+        } else if (!event.target.checked) {
+          var updatedArr = this.state.animals.filter(
+            animal => animal != event.target.value
+          );
+          this.setState({ animals: updatedArr }, () =>
+            this.animalsValidation()
+          );
+        }
     }
+  }
+
+  onSubmit(event) {
+    console.log("hit");
+    event.prevetDefault();
+    var newAcc = {
+      email: this.state.email,
+      colour: this.state.colour,
+      animals: this.state.animals
+    };
+
+    this.setState({ submit: true, newAcc });
   }
 
   emailValidation(email) {
@@ -33,91 +77,175 @@ export default class AwesomeForm extends Component {
     return re.test(email);
   }
 
+  animalsValidation() {
+    if (this.state.animals.length < 2) {
+      this.setState({ animalError: true });
+      this.containsTiger();
+    } else {
+      this.setState({ animalError: false });
+      this.containsTiger();
+    }
+  }
+
+  containsTiger() {
+    var arrContainsTiger = this.state.animals.indexOf("tiger") > -1;
+    if (arrContainsTiger) {
+      this.setState({ tiger: true });
+    } else {
+      this.setState({ tiger: false });
+    }
+  }
+
   render() {
     return (
       <Fragment>
-        <form method="post" action="">
-          <h1>Fill out this awesome form</h1>
-          <fieldset>
-            <h3>Your details</h3>
-            <p className={!this.state.emailError ? "" : "error"}>
-              <label class="label" for="email">
-                Email
-              </label>
-              <input
-                type="text"
-                id="email"
-                name="email"
-                onChange={this.handleChange}
+        {!this.state.submit ? (
+          <form onSubmit={this.onSubmit}>
+            <h1>Fill out this awesome form</h1>
+            <fieldset>
+              <h3>Your details</h3>
+              <p className={!this.state.emailError ? "" : "error"}>
+                <label className="label" for="email">
+                  Email
+                </label>
+                <input
+                  type="text"
+                  id="email"
+                  name="email"
+                  onChange={this.handleChange}
+                  required
+                />
+              </p>
+              {this.state.emailError ? (
+                <p className="error">Email is invalid</p>
+              ) : (
+                ""
+              )}
+
+              <p className={!this.state.passwordError ? "" : "error"}>
+                <label className="label" for="password">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  onChange={this.handleChange}
+                  required
+                />
+              </p>
+              {this.state.passwordError ? (
+                <p className="error">
+                  Password must be longer than 8 characters
+                </p>
+              ) : (
+                ""
+              )}
+            </fieldset>
+
+            <fieldset>
+              <h3>Your animal</h3>
+              <p>
+                <label className="label" for="colour">
+                  Colour
+                </label>
+                <select required name="colour" id="colour">
+                  <option value="">Choose colour</option>
+                  <option value="blue">Blue</option>
+                  <option value="green">Green</option>
+                  <option value="red">Red</option>
+                  <option value="black">Black</option>
+                  <option value="brown">Brown</option>
+                </select>
+              </p>
+
+              <p className={!this.state.animalError ? "" : "error"}>
+                <label for="animal" className="label">
+                  Animal
+                </label>
+
+                <input
+                  type="checkbox"
+                  name="animal"
+                  value="bear"
+                  id="bear"
+                  onChange={this.handleChange}
+                />
+                <label for="bear">Bear</label>
+
+                <input
+                  type="checkbox"
+                  name="animal"
+                  value="tiger"
+                  id="tiger"
+                  onChange={this.handleChange}
+                />
+                <label for="tiger">Tiger</label>
+
+                <input
+                  type="checkbox"
+                  name="animal"
+                  value="snake"
+                  id="snake"
+                  onChange={this.handleChange}
+                />
+                <label for="snake">Snake</label>
+
+                <input
+                  type="checkbox"
+                  name="animal"
+                  value="donkey"
+                  id="donkey"
+                  onChange={this.handleChange}
+                />
+                <label for="donkey">Donkey</label>
+              </p>
+              {this.state.animalError ? (
+                <p className="error">At least two animals must be chosen</p>
+              ) : (
+                ""
+              )}
+
+              {this.state.tiger ? (
+                <p>
+                  <label className="label" for="tiger_type">
+                    Type of tiger
+                  </label>
+                  <input
+                    type="text"
+                    name="tiger_type"
+                    id="tiger_type"
+                    required
+                  />
+                </p>
+              ) : (
+                ""
+              )}
+            </fieldset>
+            <fieldset>
+              <p>
+                <button type="submit"> Create Account </button>
+              </p>
+            </fieldset>
+          </form>
+        ) : (
+          <Fragment>
+            <h3>Email: {this.state.newAcc.email}</h3>
+            <h3>
+              Colour:{" "}
+              <div
+                className="pixel"
+                style={"color:" + this.state.newAcc.colour}
               />
-            </p>
-            {this.state.emailError ? (
-              <p className="error">Email is invalid</p>
-            ) : (
-              ""
-            )}
-
-            <p className={!this.state.passwordError ? "" : "error"}>
-              <label class="label" for="password">
-                Password
-              </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                onChange={this.handleChange}
-              />
-            </p>
-            {this.state.passwordError ? (
-              <p className="error">Password must be longer than 8 characters</p>
-            ) : (
-              ""
-            )}
-          </fieldset>
-
-          <fieldset>
-            <h3>Your animal</h3>
-            <p>
-              <label class="label" for="colour">
-                Colour
-              </label>
-              <select name="colour" id="colour">
-                <option value="">Choose colour</option>
-                <option value="blue">Blue</option>
-                <option value="green">Green</option>
-                <option value="red">Red</option>
-                <option value="black">Black</option>
-                <option value="brown">Brown</option>
-              </select>
-            </p>
-            <p>
-              <span class="label">Animal</span>
-
-              <input type="checkbox" name="animal" value="bear" id="bear" />
-              <label for="bear">Bear</label>
-
-              <input type="checkbox" name="animal" value="tiger" id="tiger" />
-              <label for="tiger">Tiger</label>
-
-              <input type="checkbox" name="animal" value="snake" id="snake" />
-              <label for="snake">Snake</label>
-
-              <input type="checkbox" name="animal" value="donkey" id="donkey" />
-              <label for="donkey">Donkey</label>
-            </p>
-            <p>
-              <label class="label" for="tiger_type">
-                Type of tiger
-              </label>
-              <input type="text" name="tiger_type" id="tiger_type" />
-            </p>
-          </fieldset>
-          <fieldset>
-            <p>
-              <input type="submit" value="Create account" />
-            </p>
-          </fieldset>
-        </form>
+            </h3>
+            <h3>Animals: </h3>
+            <ul>
+              {this.state.newAcc.animals.map(animal => {
+                return <li>{animal}</li>;
+              })}
+            </ul>
+          </Fragment>
+        )}
       </Fragment>
     );
   }

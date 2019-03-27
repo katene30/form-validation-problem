@@ -70,23 +70,23 @@ input[type="submit"] {
   cursor: pointer;
 }
 
-input[type="submit"]:hover {
+button:hover {
   background: #3c9aa7;
 }
 
-input[type="submit"]:focus {
+button {
   background: #3d6eac;
 }
 
 input[type="text"]:focus,
 input[type="password"]:focus,
-input[type="submit"]:focus {
+button {
   outline: none;
   border-color: #0b77db;
   box-shadow: 0 0 6px rgba(48, 140, 255, 0.25);
 }
 
-input[type="submit"]:active {
+button:active {
   background: #333;
   border-color: #333;
 }
@@ -111,6 +111,11 @@ fieldset + fieldset {
 .label {
   width: 10em;
   display: inline-block;
+}
+
+.pixel {
+  width: 10px;
+  height: 10px;
 }
 
 /*
