@@ -6,11 +6,17 @@
   "author": "Katene Jack Cotton <katenejack@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon server --watch",
+    "dev": "nodemon server --watch & webpack --watch",
     "start": "webpack && node server & webpack --watch"
   },
   "dependencies": {
+    "@babel/core": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
     "express": "^4.16.4",
+    "react": "^16.8.5",
+    "react-dom": "^16.8.5",
     "webpack": "^4.29.6"
   },
   "devDependencies": {
