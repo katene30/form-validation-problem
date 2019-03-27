@@ -12,6 +12,7 @@ export default class AwesomeForm extends Component {
       animals: [],
       animalError: false,
       tiger: false,
+      tigerType: "",
       submit: false,
       newAcc: {}
     };
@@ -39,6 +40,7 @@ export default class AwesomeForm extends Component {
         break;
       case "colour":
         this.setState({ colour: event.target.value });
+        break;
       case "animal":
         this.animalsValidation();
         if (event.target.checked) {
@@ -57,19 +59,28 @@ export default class AwesomeForm extends Component {
             this.animalsValidation()
           );
         }
+        break;
+      case "tiger_type":
+        this.setState({ tigerType: event.target.value });
+        break;
     }
   }
 
   onSubmit(event) {
-    console.log("hit");
-    event.prevetDefault();
+    event.preventDefault();
     var newAcc = {
       email: this.state.email,
       colour: this.state.colour,
       animals: this.state.animals
     };
 
-    this.setState({ submit: true, newAcc });
+    var animalsValid = !this.state.animalError && this.state.animals.length > 0;
+    var emailsValid = !this.state.emailError;
+    var passwordValid = !this.state.passwordError;
+
+    if (animalsValid && emailsValid && passwordValid) {
+      this.setState({ submit: true, newAcc });
+    }
   }
 
   emailValidation(email) {
@@ -149,7 +160,12 @@ export default class AwesomeForm extends Component {
                 <label className="label" for="colour">
                   Colour
                 </label>
-                <select required name="colour" id="colour">
+                <select
+                  required
+                  name="colour"
+                  id="colour"
+                  onChange={this.handleChange}
+                >
                   <option value="">Choose colour</option>
                   <option value="blue">Blue</option>
                   <option value="green">Green</option>
@@ -215,6 +231,7 @@ export default class AwesomeForm extends Component {
                     type="text"
                     name="tiger_type"
                     id="tiger_type"
+                    onChange={this.handleChange}
                     required
                   />
                 </p>
@@ -230,12 +247,13 @@ export default class AwesomeForm extends Component {
           </form>
         ) : (
           <Fragment>
-            <h3>Email: {this.state.newAcc.email}</h3>
+            <h3>Email: </h3>
+            <p>{this.state.newAcc.email}</p>
             <h3>
               Colour:{" "}
               <div
                 className="pixel"
-                style={"color:" + this.state.newAcc.colour}
+                style={{ backgroundColor: this.state.newAcc.colour }}
               />
             </h3>
             <h3>Animals: </h3>
@@ -244,6 +262,14 @@ export default class AwesomeForm extends Component {
                 return <li>{animal}</li>;
               })}
             </ul>
+            {this.state.tiger ? (
+              <Fragment>
+                <h3>Type of tiger: </h3>
+                <p>{this.state.tigerType}</p>
+              </Fragment>
+            ) : (
+              ""
+            )}
           </Fragment>
         )}
       </Fragment>
