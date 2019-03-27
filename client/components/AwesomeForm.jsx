@@ -4,7 +4,8 @@ export default class AwesomeForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: ""
+      email: "",
+      emailIsValid: false
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -13,8 +14,8 @@ export default class AwesomeForm extends Component {
     if (event.target.name == "email") {
       var isValid = this.emailValidation(event.target.value);
       isValid
-        ? this.setState({ email: event.target.value })
-        : console.log("email is invalid");
+        ? this.setState({ email: event.target.value, emailIsValid: false })
+        : this.setState({ emailIsValid: true });
     }
   }
 
@@ -30,7 +31,7 @@ export default class AwesomeForm extends Component {
           <h1>Fill out this awesome form</h1>
           <fieldset>
             <h3>Your details</h3>
-            <p>
+            <p className={!this.state.emailIsValid ? "" : "error"}>
               <label class="label" for="email">
                 Email
               </label>
@@ -41,6 +42,11 @@ export default class AwesomeForm extends Component {
                 onChange={this.handleChange}
               />
             </p>
+            {this.state.emailIsValid ? (
+              <p className="error">Email is invalid</p>
+            ) : (
+              ""
+            )}
             <p>
               <label class="label" for="password">
                 Password
