@@ -70,13 +70,12 @@ input[type="submit"] {
   cursor: pointer;
 }
 
-button:hover {
+input[type="submit"]:hover {
   background: #3c9aa7;
 }
 
-button {
+input[type="submit"]:focus {
   background: #3d6eac;
-  color: whitesmoke;
 }
 
 input[type="text"]:focus,
@@ -87,7 +86,7 @@ button {
   box-shadow: 0 0 6px rgba(48, 140, 255, 0.25);
 }
 
-button:active {
+input[type="submit"]:active {
   background: #333;
   border-color: #333;
 }

@@ -252,7 +252,7 @@ export default class AwesomeForm extends Component {
             </fieldset>
             <fieldset>
               <p>
-                <button type="submit"> Create Account </button>
+                <input type="submit" value="Create account" />
               </p>
             </fieldset>
           </form>
