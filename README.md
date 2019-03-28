@@ -19,6 +19,10 @@ yarn dev
 
 Visit http://localhost:3000 in your browser to interact with the form.
 
+## Accessibility
+
+I'm very new when it comes to accessibility so I read through the Springload blog, [Being pragmatic about accessibility](https://www.springload.co.nz/blog/being-pragmatic-about-accessibility/) and taking notes along with it of things I could update to the form and putting it into practise. I would love to hear some feedback about how I did and also some advice about ensuring the code is suitable for screen readers.
+
 ## Browser Support
 
 This web app was built and primarily manually tested on Google Chrome but I've also tested the form on Safari and Firefox. All of which, the validation and functionality works the same.
