@@ -76,6 +76,7 @@ button:hover {
 
 button {
   background: #3d6eac;
+  color: whitesmoke;
 }
 
 input[type="text"]:focus,

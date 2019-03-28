@@ -20,8 +20,6 @@ export default class AwesomeForm extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  //onsubmit checkboxes
-
   handleChange() {
     switch (event.target.name) {
       case "email":
@@ -30,6 +28,7 @@ export default class AwesomeForm extends Component {
           ? this.setState({ email: event.target.value, emailError: false })
           : this.setState({ emailError: true });
         break;
+
       case "password":
         var password = event.target.value;
         var isValid = password.length > 8;
@@ -38,9 +37,11 @@ export default class AwesomeForm extends Component {
           ? this.setState({ password, passwordError: false })
           : this.setState({ passwordError: true });
         break;
+
       case "colour":
         this.setState({ colour: event.target.value });
         break;
+
       case "animal":
         this.animalsValidation();
         if (event.target.checked) {
@@ -60,6 +61,7 @@ export default class AwesomeForm extends Component {
           );
         }
         break;
+
       case "tiger_type":
         this.setState({ tigerType: event.target.value });
         break;
@@ -246,6 +248,7 @@ export default class AwesomeForm extends Component {
             </fieldset>
           </form>
         ) : (
+          // Results from form
           <Fragment>
             <h3>Email: </h3>
             <p>{this.state.newAcc.email}</p>

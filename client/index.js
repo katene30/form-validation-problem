@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import App from "./components/App";
+import AwesomeForm from "./components/AwesomeForm";
 
 document.addEventListener("DOMContentLoaded", () => {
-  ReactDOM.render(<App />, document.getElementById("app"));
+  ReactDOM.render(<AwesomeForm />, document.getElementById("app"));
 });
