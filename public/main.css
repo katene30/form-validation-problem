@@ -136,7 +136,7 @@ fieldset + fieldset {
   color: red;
 }
 
-.error > input {
+.error > label > input {
   border-color: red;
 }
 

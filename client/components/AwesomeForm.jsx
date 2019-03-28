@@ -117,9 +117,15 @@ export default class AwesomeForm extends Component {
             <h1>Fill out this awesome form</h1>
             <fieldset>
               <h3>Your details</h3>
+
               <p className={!this.state.emailError ? "" : "error"}>
                 <label className="label">
                   Email
+                  {this.state.emailError ? (
+                    <p className="error">Email is invalid</p>
+                  ) : (
+                    ""
+                  )}
                   <input
                     type="text"
                     id="email"
@@ -129,15 +135,17 @@ export default class AwesomeForm extends Component {
                   />
                 </label>
               </p>
-              {this.state.emailError ? (
-                <p className="error">Email is invalid</p>
-              ) : (
-                ""
-              )}
 
               <p className={!this.state.passwordError ? "" : "error"}>
                 <label className="label">
                   Password
+                  {this.state.passwordError ? (
+                    <p className="error">
+                      Password must be longer than 8 characters
+                    </p>
+                  ) : (
+                    ""
+                  )}
                   <input
                     type="password"
                     id="password"
@@ -147,13 +155,6 @@ export default class AwesomeForm extends Component {
                   />
                 </label>
               </p>
-              {this.state.passwordError ? (
-                <p className="error">
-                  Password must be longer than 8 characters
-                </p>
-              ) : (
-                ""
-              )}
             </fieldset>
 
             <fieldset>
@@ -180,8 +181,13 @@ export default class AwesomeForm extends Component {
               <p className={!this.state.animalError ? "" : "error"}>
                 <label for="animal" className="label">
                   Animal
+                  {this.state.animalError ? (
+                    <p className="error">At least two animals must be chosen</p>
+                  ) : (
+                    ""
+                  )}
                 </label>
-
+                <br />
                 <label>
                   Bear
                   <input
@@ -226,11 +232,6 @@ export default class AwesomeForm extends Component {
                   />
                 </label>
               </p>
-              {this.state.animalError ? (
-                <p className="error">At least two animals must be chosen</p>
-              ) : (
-                ""
-              )}
 
               {this.state.tiger ? (
                 <p>
