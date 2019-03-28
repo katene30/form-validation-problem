@@ -118,16 +118,16 @@ export default class AwesomeForm extends Component {
             <fieldset>
               <h3>Your details</h3>
               <p className={!this.state.emailError ? "" : "error"}>
-                <label className="label" for="email">
+                <label className="label">
                   Email
+                  <input
+                    type="text"
+                    id="email"
+                    name="email"
+                    onChange={this.handleChange}
+                    required
+                  />
                 </label>
-                <input
-                  type="text"
-                  id="email"
-                  name="email"
-                  onChange={this.handleChange}
-                  required
-                />
               </p>
               {this.state.emailError ? (
                 <p className="error">Email is invalid</p>
@@ -136,16 +136,16 @@ export default class AwesomeForm extends Component {
               )}
 
               <p className={!this.state.passwordError ? "" : "error"}>
-                <label className="label" for="password">
+                <label className="label">
                   Password
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    onChange={this.handleChange}
+                    required
+                  />
                 </label>
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  onChange={this.handleChange}
-                  required
-                />
               </p>
               {this.state.passwordError ? (
                 <p className="error">
@@ -159,22 +159,22 @@ export default class AwesomeForm extends Component {
             <fieldset>
               <h3>Your animal</h3>
               <p>
-                <label className="label" for="colour">
+                <label className="label">
                   Colour
+                  <select
+                    required
+                    name="colour"
+                    id="colour"
+                    onChange={this.handleChange}
+                  >
+                    <option value="">Choose colour</option>
+                    <option value="blue">Blue</option>
+                    <option value="green">Green</option>
+                    <option value="red">Red</option>
+                    <option value="black">Black</option>
+                    <option value="brown">Brown</option>
+                  </select>
                 </label>
-                <select
-                  required
-                  name="colour"
-                  id="colour"
-                  onChange={this.handleChange}
-                >
-                  <option value="">Choose colour</option>
-                  <option value="blue">Blue</option>
-                  <option value="green">Green</option>
-                  <option value="red">Red</option>
-                  <option value="black">Black</option>
-                  <option value="brown">Brown</option>
-                </select>
               </p>
 
               <p className={!this.state.animalError ? "" : "error"}>
@@ -182,41 +182,49 @@ export default class AwesomeForm extends Component {
                   Animal
                 </label>
 
-                <input
-                  type="checkbox"
-                  name="animal"
-                  value="bear"
-                  id="bear"
-                  onChange={this.handleChange}
-                />
-                <label for="bear">Bear</label>
+                <label>
+                  Bear
+                  <input
+                    type="checkbox"
+                    name="animal"
+                    value="bear"
+                    id="bear"
+                    onChange={this.handleChange}
+                  />
+                </label>
 
-                <input
-                  type="checkbox"
-                  name="animal"
-                  value="tiger"
-                  id="tiger"
-                  onChange={this.handleChange}
-                />
-                <label for="tiger">Tiger</label>
+                <label>
+                  Tiger
+                  <input
+                    type="checkbox"
+                    name="animal"
+                    value="tiger"
+                    id="tiger"
+                    onChange={this.handleChange}
+                  />
+                </label>
 
-                <input
-                  type="checkbox"
-                  name="animal"
-                  value="snake"
-                  id="snake"
-                  onChange={this.handleChange}
-                />
-                <label for="snake">Snake</label>
+                <label>
+                  Snake
+                  <input
+                    type="checkbox"
+                    name="animal"
+                    value="snake"
+                    id="snake"
+                    onChange={this.handleChange}
+                  />
+                </label>
 
-                <input
-                  type="checkbox"
-                  name="animal"
-                  value="donkey"
-                  id="donkey"
-                  onChange={this.handleChange}
-                />
-                <label for="donkey">Donkey</label>
+                <label>
+                  Donkey
+                  <input
+                    type="checkbox"
+                    name="animal"
+                    value="donkey"
+                    id="donkey"
+                    onChange={this.handleChange}
+                  />
+                </label>
               </p>
               {this.state.animalError ? (
                 <p className="error">At least two animals must be chosen</p>
@@ -226,16 +234,16 @@ export default class AwesomeForm extends Component {
 
               {this.state.tiger ? (
                 <p>
-                  <label className="label" for="tiger_type">
+                  <label className="label">
                     Type of tiger
+                    <input
+                      type="text"
+                      name="tiger_type"
+                      id="tiger_type"
+                      onChange={this.handleChange}
+                      required
+                    />
                   </label>
-                  <input
-                    type="text"
-                    name="tiger_type"
-                    id="tiger_type"
-                    onChange={this.handleChange}
-                    required
-                  />
                 </p>
               ) : (
                 ""
